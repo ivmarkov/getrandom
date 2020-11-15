@@ -218,6 +218,8 @@ cfg_if! {
         #[cfg_attr(cargo_web, path = "stdweb.rs")]
         #[cfg_attr(not(cargo_web), path = "wasm-bindgen.rs")]
         mod imp;
+    } else if #[cfg(all(target_os = "none", target_vendor = "espressif"))] {
+        #[path = "espidf.rs"] mod imp;
     } else if #[cfg(feature = "custom")] {
         use custom as imp;
     } else {
